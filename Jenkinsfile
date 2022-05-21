@@ -68,15 +68,16 @@ pipeline {
             
         }
         
-        /*
+        
          stage('QAT Test') {
             steps {
+            retry(5) {
                 sh 'curl --silent http://13.233.100.238:8080/java-web-app/ |  grep India'
-               
+               }
             }
         }
           
-          */
+         
          
          
         stage('approved') {
