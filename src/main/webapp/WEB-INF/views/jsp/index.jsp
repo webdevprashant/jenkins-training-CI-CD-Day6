@@ -41,7 +41,7 @@
 	<div class="row">
 		<div class="col-md-8">
 			<h2>Welcome To LinuxWorld, India</h2>
-			<h3>Contact training@lwindia.com</h3>
+			<h3>Contact training@lwindia.com or mob 12345</h3>
 		</div>	
 	</div>
 
