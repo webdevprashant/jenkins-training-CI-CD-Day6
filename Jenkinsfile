@@ -72,9 +72,12 @@ pipeline {
          stage('QAT Test') {
             steps {
                 
+                sh 'curl --silent http://13.233.100.238:8080/java-web-app/ |  grep India'
+                /*
                 retry(10) {
                     sh 'curl --silent http://13.233.100.238:8080/java-web-app/ |  grep India'
                 }
+                */
                
             }
         }
