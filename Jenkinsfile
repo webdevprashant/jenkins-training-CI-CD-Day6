@@ -72,12 +72,12 @@ pipeline {
          stage('QAT Test') {
             steps {
                 
-                sh 'curl --silent http://13.233.100.238:8080/java-web-app/ |  grep India'
-                /*
+               // sh 'curl --silent http://13.233.100.238:8080/java-web-app/ |  grep India'
+                
                 retry(10) {
                     sh 'curl --silent http://13.233.100.238:8080/java-web-app/ |  grep India'
                 }
-                */
+            
                
             }
         }
@@ -129,16 +129,7 @@ pipeline {
         
     }
     
-    pipeline {
-     agent any
-     stages {
-         stage('build step') {
-              steps {
-                 echo "Build stage is running"
-              }
-         }
-     }
-        
+  
         
      post {
          always {
@@ -155,7 +146,7 @@ pipeline {
              mail bcc: '', body: 'hi check this ..', cc: '', from: '', replyTo: '', subject: 'job ete fail', to: 'vdaga@lwindia.com'
          }
      }
-}
+
     
     
 }
