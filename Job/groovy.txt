@@ -1,0 +1,48 @@
+pipeline {
+    agent { label "slaveone" }
+    
+    stages {
+        stage('SCM') {
+       steps {
+                    //echo "I am in SCM Stage"
+                    git 'https://github.com/webdevprashant/jenkins-training-CI-CD-Day6.git'
+                }        
+        }
+        stage('Build by Maven') {
+                steps {
+                    //echo "I am in Build Stage"
+                    sh 'mvn clean package'
+                }
+        }
+        stage('Build docker image') {
+                steps {
+                    sh "docker build -t webdevprashant/javaapp-day6:${BUILD_NUMBER} ."
+                }
+        }
+        stage('Push docker image') {
+                steps {
+                    withCredentials([string(credentialsId: 'Docker_hub_password', variable: 'VAR_FOR_DOCKERPASS')]) {
+                    sh "docker login -u webdevprashant -p $VAR_FOR_DOCKERPASS"
+                    }
+                    sh "docker push webdevprashant/javaapp-day6:${BUILD_NUMBER}"
+                }
+        }
+        
+        stage('Deploy Java App in  Dev Env') {
+                steps {
+                        sh "docker run  -d -p 8080:8080 --name myjavaapp webdevprashant/javaapp-day6:${BUILD_NUMBER}"
+                }
+        }
+        
+        stage('Deploy Java in QA/Test Env') {
+            steps {
+                    sshagent(['QA_ENV_SSH_CRED']) {
+                        //sh "ssh root@192.168.43.210 date"
+                        sh "ssh root@192.168.43.210 docker rm -f myjavaapp"
+                        sh "ssh root@192.168.43.210 docker run  -d -p 8080:8080 --name myjavaapp webdevprashant/javaapp-day6:${BUILD_NUMBER}"
+                    }
+            }
+        }
+        
+    }
+}   
