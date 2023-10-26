@@ -5,7 +5,7 @@
 	<groupId>com.mt</groupId>
 	<artifactId>java-web-app</artifactId>
 	<packaging>war</packaging>
-	<version>1.0</version>
+	<version>2.0</version>
 	
 	<name>Maven Web Application</name>
 	<url>http://mithuntechnologies.com</url>
