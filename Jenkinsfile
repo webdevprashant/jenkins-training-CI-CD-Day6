@@ -1,11 +1,11 @@
 pipeline {
-    agent {  label "master"    }
+    agent {  label "main"    }
     
     stages {
         // Step 1
         stage('SCM') {
                 steps {
-                    git 'https://github.com/webdevprashant/jenkins-training-CI-CD-Day6.git'
+                    git 'hhttps://github.com/naikpradyumna295/jenkins-training-CI-CD-Day6.git'
                 }        
         }
         // Step 2
@@ -18,7 +18,7 @@ pipeline {
         // Step 3
         stage('Build docker image') {
                 steps {
-                    sh "sudo docker build -t webdevprashant/javaapp-day6:${BUILD_NUMBER} ."
+                    sh "sudo docker build -t webdevprashantp/javaapp-day6:${BUILD_NUMBER} ."
                 }
         }
         
